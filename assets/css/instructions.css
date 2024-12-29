@@ -1,0 +1,142 @@
+/* Global Styles */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Tahoma, sans-serif;
+} 
+body{
+    background-color: #1B1212;
+    color: #FFFFF0;
+    padding: 20px;
+    line-height: 1.6;
+}
+  
+/*navigation bar styles*/
+.nav-bar{
+    display: flex;
+    flex-direction: row;
+    gap:50px;
+    justify-content: center;
+    text-align: center;
+    padding : 10px ;
+    margin: 20px auto;
+    max-width: 1200px;
+    background-color: rgb(240, 248, 255 , 0.2);
+    border: 1px solid #230C33;
+}
+.nav-bar span > a {
+    color : #FAF9F6;
+    text-decoration: none ;
+}
+.nav-bar span > a > i{
+    margin-right : 5px;
+}
+
+/*container styling*/
+.container{
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: rgb(243, 240, 253 , 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    margin-bottom: 20px;
+    line-height: 1.2;
+    box-sizing: border-box;
+}
+  
+/*h1 styling*/
+#main-heading{
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/*all h2 styling*/
+.sub-heading{
+    font-size: 24px;
+    margin: 20px 0;
+    color: #FAF9F6;
+}
+
+/*descriptions styling*/
+#main-description{
+    text-align: center;
+    font-size: large;
+    justify-content: center;
+}
+.description{
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+/*horizontal line*/
+hr {
+    margin-bottom: 10px;
+}
+
+/*list styling*/
+ol{
+    padding-left: 20px;
+}
+.sub-points{
+    display: block;
+    margin-bottom: 10px;
+}
+ul{
+    list-style-type: disc;
+    margin-left: 20px;
+} 
+li{
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+  
+
+/*good-luck-msg styling*/
+#good-luck-msg{
+    text-align: center;
+}
+h3{
+    margin-bottom: 10px;
+}
+#home-page-btn{
+    background-color: #FAF9F6;
+    padding :5px 10px;
+    margin-bottom: 5px;
+    border : 1px solid  #FAF9F6;
+    border-radius: 16px;
+}
+#home-page-btn > a {
+    color: #1B1212;
+    font-weight: bold;
+    font-size: 16px;
+    text-decoration: none;
+}
+#home-page-btn:hover{
+    padding:6px 15px;
+}
+/*Responsive Design*/
+@media (max-width: 600px) {
+    h1 {
+      font-size: 28px;
+    }
+  
+    h2 {
+      font-size: 20px;
+    }
+  
+    p, li {
+      font-size: 14px;
+    }
+   
+    .nav-bar{
+        flex-direction: column;
+        gap:5px;
+        padding:5px;
+        justify-content: center;
+        text-align: center;
+        align-items: flex-start;
+    }
+}
+  
