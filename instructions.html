@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brain-Battle-Instuctions</title>
+    <link rel="stylesheet" href="assets/css/instructions.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Heading -->
+    <h1 id="main-heading">Welcome to Brain Battle : Instructions & Rules</h1>
+    <p id="main-description">Think you've got what it takes to outsmart your opponent? Follow these simple instructions and game rules to start your trivia battle!</p>
+
+    <!-- navigtion menu -->
+    <div class="nav-bar">
+        <span><a href="#how-to-play"><i class="fa fa-play" aria-hidden="true"></i>How to Play</a></span>
+        <span><a href="#rules-regulations"><i class="fa-solid fa-triangle-exclamation"></i>Rules & Regulations</a></span>
+        <span><a href="#tips"><i class="fa-solid fa-lightbulb"></i>Game Tips</a></span>
+        <span><a href="index.html"><i class="fa fa-home" aria-hidden="true"></i>Home Page</a></span>
+    </div>
+
+    <!-- container for how to play? -->
+    <div class="container" id="how-to-play" >
+    <h2 class="sub-heading">How to Play</h2>
+    <hr>
+    <ol>
+        <li>
+            <span class="sub-points"><b>Player Setup:</b></span>
+            <ul class="points">
+                <li>Both players begin by entering their names in the input fields.</li>
+                <li>Click the <span><b>Next <i class="fa fa-long-arrow-right" aria-hidden="true"></i></b> </span> button to proceed to the next step.</li>
+            </ul>
+        </li>
+        <li>
+            <span class="sub-points"><b>Category Selection :</b></span>          
+            <ul class="points">
+                <li>You and your opponent will choose a common <b>category</b> from a list (e.g., General Knowledge, Science, Sports, Food etc.).</li>
+                <li>Once a category is selected, click <b>Start Quiz</b> to fetch the questions.</li>
+            </ul>
+        </li>
+        <li>
+            <span class="sub-points"><b>Question Round:</b></span>
+            <ul class="points">
+                <li>
+                    <span class="sub-points">The game has 6 questions from the selected category:</span>
+                    <ul>
+                        <li><b>2 Easy Questions</b> (10 points each)</li>
+                        <li><b>2 Medium Questions</b> (15 points each)</li>
+                        <li><b>2 Hard Questions</b> (20 points each)</li>
+                    </ul>
+                </li>
+                <li>
+                    <span class="sub-points">The players will take turns answering questions:</span>
+                    <ul>
+                        <li>Player 1 answers the first easy question.</li>
+                        <li>Player 2 answers the second easy question.</li>
+                        <li>This pattern continues for medium and hard questions.</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <span class="sub-points"><b>Answering Questions:</b></span>
+            <ul class="points">
+                <li>For each question, you will be shown a multiple-choice set of answers.</li>
+                <li>Choose your answer carefully! You can only select one option.</li>
+                <li>Once an answer is selected, the correct answer is revealed, and points are awarded based on the difficulty of the question.</li>
+            </ul>
+        </li>
+        <li>
+            <span class="sub-points"><b>Scoring</b></span>
+            <ul>
+                <li>Easy Question: 10 points for a correct answer.</li>
+                <li>Medium Question: 15 points for a correct answer.</li>
+                <li>Hard Question: 20 points for a correct answer.</li>
+            </ul>
+        </li>
+        <li>
+            <span class="sub-points"><b>End of the Round:</b></span>
+            <ul class="points">
+                <li>
+                    <span class="sub-points">After all 6 questions from the chosen category are answered, the players have two options:</span>
+                    <ul>
+                        <li><b>Select another category</b> and repeat the question round (previously chosen categories are disabled).</li>
+                        <li><b>End the game</b> and proceed to the results page.</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <span class="sub-points"><b>Game End and Results:</b></span>          
+            <ul class="points">
+                <li>The game ends when either all categories are exhausted or players choose to finish early.</li>
+                <li>The final scores are displayed, and the player with the highest score is declared the winner.</li>
+                <li>If both players have the same score, it results in a draw.</li>
+            </ul>
+        </li>
+    </ol>
+    </div>
+
+    <!-- Container for rules and regulations -->
+    <div class="container" id="rules-regulations">
+    <h2 class="sub-heading">Rules and Regulations</h2>
+    <p class="description">To ensure a fair and fun gameplay experience, please follow these rules and regulations:</p>
+    <hr>
+    <ol>
+        <li>
+            <span class="sub-points"><b>Player Turn</b></span>
+            <ul class="points">
+                <li>Players must take turns answering questions.</li>
+                <li>Player 1 always answers the first question, followed by Player 2, and alternates continue for each question type (easy, medium, hard).</li>
+            </ul>
+        </li>
+        <li>
+            <span class="sub-points"><b>Correct Answers</b></span>
+            <ul class="points">
+                <li>Players must select only one answer per question. Once selected, it cannot be changed.</li>
+                <li>Correct answers will be highlighted after the player selects an option.</li>
+            </ul>
+        </li>
+        <li>
+            <span class="sub-points"><b>Points Distribution</b></span>
+            <ul class="points">
+                <li>Points are awarded based on the difficulty of the question as mentioned above.</li>
+                <li>No points are deducted for incorrect answers, but the turn will move to the next player.</li>
+            </ul>
+        </li>
+        <li>
+            <span class="sub-points"><b>Category Selection</b></span>
+            <ul class="points">
+                <li>Both players must agree on the category before starting the round.</li>
+                <li>Categories can only be chosen once. After a category has been used, it will be disabled and unavailable for future rounds.</li>
+            </ul>
+        </li>
+        <li>
+            <span class="sub-points"><b>Game Completion</b></span>
+            <ul class="points">
+                <li>The game can be ended manually by selecting the option to end the game after a round.</li>
+                <li>The game can also be ended automatically when all available categories have been used.</li>
+            </ul>
+        </li>
+        <li>
+            <span class="sub-points"><b>Winner Declaration</b></span>
+            <ul class="points"> 
+                <li>The player with the highest score at the end of the game is declared the winner.</li>
+                <li>In the case of a tie (equal scores), the game results in a draw.</li>
+            </ul>
+        </li>
+        <li>
+            <span class="sub-points"><b>Replay</b></span>
+            <ul class="points">
+                <li>Players can choose to restart the game and play again with new categories or the same category.</li>
+            </ul>
+        </li>
+    </ol>
+    </div>
+
+    <!-- container for game tips -->
+    <div class="container" id="tips">
+    <h2 class="sub-heading">Game Tips</h2>
+    <hr>
+    <ul>
+        <li><b>Strategy:</b> Since harder questions are worth more points, saving your best guesses for medium and hard rounds can boost your score.</li>
+        <li><b>Time Management:</b> If using the timer, keep an eye on the clock. Make sure to read all answer options before time runs out.</li>
+        <li><b>Category Knowledge:</b> Pick categories that both you and your opponent know well for an exciting and balanced challenge.</li>
+        <li><b>Have Fun!:</b> This game is meant to be fun and challenging, so enjoy playing and testing your knowledge!</li>
+    </ul>
+    </div>
+
+    <!--container for good luck message-->
+    <div class="container" id="good-luck-msg">
+        <h3>Let the Trivia Duel Begin!</h3>
+        <p class="description">Think you're the trivia champion? Enter your names, select a category, and start your journey to quiz victory!</p>
+        <button id="home-page-btn"><a href="index.html"><i class="fa fa-home" aria-hidden="true"></i> Home Page</a></button>
+    </div>
+</body>
+</html>
