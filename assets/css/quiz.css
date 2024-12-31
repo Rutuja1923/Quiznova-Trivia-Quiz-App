@@ -1,0 +1,120 @@
+body{
+    background-color: #1B1212;
+    color: #FFFFF0;
+    font-family: Tahoma, sans-serif;
+}
+
+.score-tracker-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.player-tracker{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+#player1-name,
+#player2-name{
+    width: 50px;
+    height: 50px;
+    margin: 10px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.round-div{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #ddd;
+    margin: 10px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+}
+
+.question-info-container,
+.question-container,
+.btn-div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+h3{
+    font-size: 1.5rem;
+}
+
+.details{
+    display: flex;
+    width: 80%; 
+    gap: 5rem;
+    align-items: center;
+    font-size: 18px;
+    font-weight: bold;
+    justify-content: space-between; 
+    flex-wrap: wrap; 
+    text-align: center;
+    color: #c5c6c7;
+}
+
+.details p{
+    flex: 1; 
+    text-align: center;
+}
+
+.question-container{
+    background-color: #342828;
+    margin: 10px 20px;
+    border-radius: 16px;
+}
+#quest-text{
+    font-size: 25px;
+    font-weight: 700;
+    padding: 3px 8px;
+}
+
+.options-container {
+    display: flex;
+    flex-direction: column;
+}
+.options-container button{
+    background-color: #1B1212;
+    padding: 3px 20px;
+    text-align: center;
+    font-size: larger;
+    border-radius: 20px;
+    border: none;
+    margin: 10px auto;
+    font-weight: bold;
+    color: #FFFFF0;
+    height: 40px;
+}
+
+.btn-div button{
+    margin: 5px auto;
+    background-color: #342828;
+    padding: 3px 20px;
+    text-align: center;
+    font-size: larger;
+    border-radius: 20px;
+    border: none;
+    margin: 10px auto;
+    font-weight: bold;
+    color: #FFFFF0;
+    height: 40px;
+}
