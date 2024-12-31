@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Score</title>
+    <link rel="stylesheet" href="assets/css/score.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <h2>Score Board</h2>
+    <h3 id="category-name"></h3>
+    <table>
+        <thead>
+            <th>Player Name</th>
+            <th>Score</th>
+        </thead>
+        <tbody>
+            <tr>
+                <td id="player-1-name"></td>
+                <td id="player-1-score"></td>
+            </tr>
+            <tr>
+                <td id="player-2-name"></td>
+                <td id="player-2-score"></td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="winner-container">
+        <p><i class="fa-solid fa-trophy"></i> Winner : </p>
+    </div>
+    <div class="button-container">
+        <button id="choose-another-category">Choose Another Category</button>
+        <button id="end-game">End Game</button>
+    </div>
+    <script src="/assets/js/script.js"></script>
+</body>
+</html>
