@@ -2,9 +2,12 @@ window.onload = () => {
     const page = document.body.getAttribute('data-page');
 
     if (page === "home"){
+        sessionStorage.setItem('player1name','');
+        sessionStorage.setItem('player2name', '');
         handleHomePage();
     } 
     else if (page === "categories"){
+        sessionStorage.setItem('currentSelectedCategory','');
         handleCategoriesPage();
     }
     else if (page === "quiz"){
@@ -70,12 +73,24 @@ function handleHomePage() {
 
 function handleCategory(categoryName){
     console.log(`Chosen category ${categoryName}`);
+    sessionStorage.setItem('currentSelectedCategory',categoryName);
+    const currCatDiv = document.getElementById(`${categoryName}`);
+    currCatDiv.setAttribute('disabled',true);
+    currCatDiv.style.backgroundColor = '#848884';
+    currCatDiv.style.cursor = 'none';
 }
 
 function handleCategoriesPage(){
     
     document.getElementById('start-quiz-btn').addEventListener('click', () => {
-        window.location.href = "quiz.html";
+        const selectedCategory = sessionStorage.getItem('currentSelectedCategory');
+        if (!selectedCategory) {
+            document.getElementById('message').innerText = "Please Select a Category Before Starting The Quiz!";
+        }
+        else{
+            document.getElementById('message').innerText = "";
+            window.location.href = 'quiz.html';
+        }
     });
 }
 
