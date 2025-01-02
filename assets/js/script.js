@@ -18,7 +18,7 @@ window.onload = () => {
     }
 };
 
-const handleHomePage = () => {
+function handleHomePage() {
 
     const validateNames = () => {
         const player1name = document.getElementById('player1-input').value.trim();
@@ -38,14 +38,28 @@ const handleHomePage = () => {
             return false;
         }
         else{
-            // document.getElementById('error-message').innerText = 'Yay! Click on next to select category for quiz!';
-            // document.getElementById('next-btn').style.backgroundColor = '#C1E1C1';
-            // document.getElementById('next-btn').style.color = '#1B1212';
             sessionStorage.setItem('player1name', player1name);
             sessionStorage.setItem('player2name', player2name);
             return true;
         }
     }
+
+    const handleButton = () => {
+        const player1name = document.getElementById('player1-input').value.trim();
+        const player2name = document.getElementById('player2-input').value.trim();
+        if ( player1name && player2name && player1name !== player2name) {
+            document.getElementById('error-message').innerText = 'Yay! Click on next to select category for quiz!';
+            document.getElementById('next-btn').style.backgroundColor = '#C1E1C1';
+            document.getElementById('next-btn').style.color = '#1B1212';
+        }
+        else {
+            document.getElementById('error-message').innerText = '';
+            document.getElementById('next-btn').style.backgroundColor = '';
+            document.getElementById('next-btn').style.color = '';
+        }
+    }
+    document.getElementById('player1-input').addEventListener('input', handleButton);
+    document.getElementById('player2-input').addEventListener('input', handleButton);
 
     document.getElementById('next-btn').addEventListener('click', () => {
         if (validateNames()){
@@ -53,27 +67,28 @@ const handleHomePage = () => {
         }
     });
 }
-const handleCategory = (categoryName) =>{
+
+function handleCategory(categoryName){
     console.log(`Chosen category ${categoryName}`);
 }
 
-const handleCategoriesPage = () => {
+function handleCategoriesPage(){
     
     document.getElementById('start-quiz-btn').addEventListener('click', () => {
         window.location.href = "quiz.html";
     });
 }
 
-const handleQuizPage = () => {
+function handleQuizPage(){
     const player1name = sessionStorage.getItem('player1name');
     const player2name = sessionStorage.getItem('player2name');
     console.log(player1name,player2name);
 }
 
-const handleScorePage = () => {
+function handleScorePage(){
 
 }
 
-const handleResultPage = () => {
+function handleResultPage(){
 
 }
