@@ -3,11 +3,21 @@ window.onload = () => {
 
     if (page === "home"){
         sessionStorage.setItem('player1name','');
-        sessionStorage.setItem('player2name', '');
+        sessionStorage.setItem('player2name','');
+        sessionStorage.setItem('selectedCategoriesList', JSON.stringify([]));
         handleHomePage();
     } 
     else if (page === "categories"){
         sessionStorage.setItem('currentSelectedCategory','');
+
+        //using category-array to store selected list ifo and disable them for furthur rounds.
+        let selectedCategoriesList = JSON.parse(sessionStorage.getItem('selectedCategoriesList')) || "[]";
+        selectedCategoriesList.forEach((catName) => {
+            const prevSelectedCat = document.getElementById(catName);
+            prevSelectedCat.setAttribute('disabled',true);
+            prevSelectedCat.style.backgroundColor = '#848884';
+            prevSelectedCat.style.cursor = 'not-allowed';
+        });
         handleCategoriesPage();
     }
     else if (page === "quiz"){
@@ -73,11 +83,21 @@ function handleHomePage() {
 
 function handleCategory(categoryName){
     console.log(`Chosen category ${categoryName}`);
+    let categoryArray = JSON.parse(sessionStorage.getItem('selectedCategoriesList'));
+    if (!categoryArray.includes(categoryName)) {
+        categoryArray.push(categoryName);
+        sessionStorage.setItem('selectedCategoriesList', JSON.stringify(categoryArray));
+    }
     sessionStorage.setItem('currentSelectedCategory',categoryName);
-    const currCatDiv = document.getElementById(`${categoryName}`);
+    const currCatDiv = document.getElementById(categoryName);
     currCatDiv.setAttribute('disabled',true);
     currCatDiv.style.backgroundColor = '#848884';
-    currCatDiv.style.cursor = 'none';
+
+    //disabling all other categories after selecting one category for that round
+    let categoryCards = document.querySelectorAll('.category-card');
+    categoryCards.forEach((categoryCard) => {
+        categoryCard.style.cursor = 'not-allowed';
+    });
 }
 
 function handleCategoriesPage(){
@@ -97,7 +117,6 @@ function handleCategoriesPage(){
 function handleQuizPage(){
     const player1name = sessionStorage.getItem('player1name');
     const player2name = sessionStorage.getItem('player2name');
-    console.log(player1name,player2name);
 }
 
 function handleScorePage(){
