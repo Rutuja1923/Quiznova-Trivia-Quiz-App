@@ -7,7 +7,6 @@ window.onload = async () => {
         sessionStorage.setItem('selectedCategoriesList', JSON.stringify([]));
         sessionStorage.setItem('player1TotalScore',0);
         sessionStorage.setItem('player2TotalScore',0);
-        sessionStorage.setItem('currPlayer',1);
         sessionStorage.setItem('scoresList',JSON.stringify([10,15,20]));
         sessionStorage.setItem('difficultiesList', JSON.stringify(['easy','medium','hard']));
         handleHomePage();
@@ -27,8 +26,9 @@ window.onload = async () => {
     }
     else if (page === "quiz"){
         sessionStorage.setItem('player1currentScore',0);
-        sessionStorage.setItem('player2CurrentScore',0);
+        sessionStorage.setItem('player2currentScore',0);
         sessionStorage.setItem('qIndex',1);
+        sessionStorage.setItem('currPlayer',1);
         await handleQuizPage();
     }
     else if (page === "score"){
@@ -149,6 +149,7 @@ async function handleQuizPage(){
             document.getElementById('question-container').innerHTML = 'Loading...';
             sessionStorage.setItem('qIndex', qIndex);
             await setQuizData(qIndex, currCatName);
+            changePlayer();
         } else {
             window.location.href = 'score.html';
         }
@@ -201,7 +202,24 @@ function shuffle(array) {
     }
 }
 
+function changePlayer(){
+    if ( parseNumString(sessionStorage.getItem('currPlayer')) === 1 ) {
+        sessionStorage.setItem('currPlayer',2) ;
+    }
+    else {
+        sessionStorage.setItem('currPlayer',1) ;
+    }
+}
+
 async function setQuizData(qIndex,currCatName) {
+    //adding a selectedAnswerIndex variable 
+    sessionStorage.setItem('selectedAnswerIndex',-1);
+
+    //disableing next-btn until an option is selected
+    document.getElementById('next-question').disabled = true;
+    document.getElementById('next-question').style.backgroundColor = '';
+    document.getElementById('next-question').style.color = '';
+
     //getting required question info
     let difficultiesList = JSON.parse(sessionStorage.getItem('difficultiesList'));
     let scoresList = JSON.parse(sessionStorage.getItem('scoresList'));
@@ -237,22 +255,63 @@ async function setQuizData(qIndex,currCatName) {
     allOptions.forEach((option,index) => {
         const optBtn = document.createElement('button');
         optBtn.innerText = option;
-        optBtn.addEventListener('click', () => handleAnswer(optBtn, index, correctAnswerIndex,currIndex));
+        optBtn.addEventListener('click', () => {
+            sessionStorage.setItem('selectedAnswerIndex',index);
+            handleAnswer(optBtn, index, correctAnswerIndex,currIndex);
+            if (parseNumString(sessionStorage.getItem('selectedAnswerIndex')) > -1){
+                console.log(sessionStorage.getItem('selectedAnswerIndex'));
+                document.getElementById('next-question').disabled = false;
+                document.getElementById('next-question').style.backgroundColor = '#C1E1C1';
+                document.getElementById('next-question').style.color = '#1B1212';
+            }
+        });
         optionsContainer.appendChild(optBtn);
     });
     document.getElementById('question-container').appendChild(optionsContainer);
 
-    //changing the current-player for taking turns
-    if ( parseNumString(sessionStorage.getItem('currPlayer')) === 1 ) {
-        sessionStorage.setItem('currPlayer',2) ;
-    }
-    else {
-        sessionStorage.setItem('currPlayer',1) ;
-    }
+    
 }
 
-// function handleAnswer(){}
+function handleAnswer(optBtn, index, correctAnswerIndex,currIndex){
+    let currPlayer = parseNumString(sessionStorage.getItem('currPlayer'));
+    let player1currentScore = parseNumString(sessionStorage.getItem('player1currentScore'));
+    let player2currentScore = parseNumString(sessionStorage.getItem('player2currentScore'));
+    let player1TotalScore = parseNumString(sessionStorage.getItem('player1TotalScore'));
+    let player2TotalScore = parseNumString(sessionStorage.getItem('player2TotalScore'));
+    let difficultiesList = JSON.parse(sessionStorage.getItem('difficultiesList'));
+    let scoresList = JSON.parse(sessionStorage.getItem('scoresList'));
+    let currDifficulty = difficultiesList[currIndex];
+    let currScore = scoresList[currIndex];
 
+    if (index === correctAnswerIndex){
+        if (currPlayer === 1){
+            player1TotalScore+= currScore;
+            player1currentScore+= currScore;
+            document.getElementById(`player1-${currDifficulty}`).textContent = '✔';
+            document.getElementById(`player1-${currDifficulty}`).style.backgroundColor = 'lightgreen';
+            sessionStorage.setItem('player1currentScore',player1currentScore);
+            sessionStorage.setItem('player1TotalScore',player1TotalScore);
+        }
+        else if (currPlayer === 2){
+            player2TotalScore+= currScore;
+            player2currentScore+= currScore;
+            document.getElementById(`player2-${currDifficulty}`).textContent = '✔';
+            document.getElementById(`player2-${currDifficulty}`).style.backgroundColor = 'lightgreen';
+            sessionStorage.setItem('player2currentScore',player2currentScore);
+            sessionStorage.setItem('player2TotalScore',player2TotalScore);
+        }
+    }
+    else{
+        if (currPlayer === 1){
+            document.getElementById(`player1-${currDifficulty}`).textContent = '✖';
+            document.getElementById(`player1-${currDifficulty}`).style.backgroundColor = 'lightcoral';
+        }
+        else{
+            document.getElementById(`player2-${currDifficulty}`).textContent = '✖';
+            document.getElementById(`player2-${currDifficulty}`).style.backgroundColor = 'lightcoral';
+        }
+    }
+}
 
 function handleScorePage(){
 
