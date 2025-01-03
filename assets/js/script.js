@@ -7,6 +7,12 @@ window.onload = async () => {
         sessionStorage.setItem('selectedCategoriesList', JSON.stringify([]));
         sessionStorage.setItem('player1TotalScore',0);
         sessionStorage.setItem('player2TotalScore',0);
+        sessionStorage.setItem('player1currentScore',0);
+        sessionStorage.setItem('player2currentScore',0);
+        sessionStorage.setItem('selectedAnswerIndex',-1);
+        sessionStorage.setItem('currentSelectedCategory','');
+        sessionStorage.setItem('currPlayer',0);
+        sessionStorage.setItem('qIndex',0);
         sessionStorage.setItem('scoresList',JSON.stringify([10,15,20]));
         sessionStorage.setItem('difficultiesList', JSON.stringify(['easy','medium','hard']));
         handleHomePage();
@@ -347,5 +353,30 @@ function handleScorePage(){
 }
 
 function handleResultPage(){
+    const player1name = sessionStorage.getItem('player1name');
+    const player2name = sessionStorage.getItem('player2name');
+    let player1TotalScore = parseNumString(sessionStorage.getItem('player1TotalScore'));
+    let player2TotalScore = parseNumString(sessionStorage.getItem('player2TotalScore'));
 
+    document.getElementById('player-1-name').innerText = player1name;
+    document.getElementById('player-2-name').innerText = player2name;
+    document.getElementById('player-1-score').innerText = player1TotalScore;
+    document.getElementById('player-2-score').innerText = player2TotalScore;
+
+    if (player1TotalScore > player2TotalScore){
+        document.getElementById('final-winner-name').innerText = player1name;
+    }
+    else if (player1TotalScore < player2TotalScore){
+        document.getElementById('final-winner-name').innerText = player2name;
+    }
+    else{
+        document.getElementById('final-winner-name').innerText = '-';
+        const drawmsg = document.createElement('p');
+        drawmsg.innerText = `Well Played! It's a draw!`;
+        document.getElementsByClassName('final-winner-container').appendChild(drawmsg);
+    }
+
+    document.getElementById('home-page-button').addEventListener('click', () => {
+        window.location.href = 'index.html';
+    });
 }
