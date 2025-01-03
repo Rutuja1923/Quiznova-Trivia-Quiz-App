@@ -314,7 +314,36 @@ function handleAnswer(optBtn, index, correctAnswerIndex,currIndex){
 }
 
 function handleScorePage(){
+    const player1name = sessionStorage.getItem('player1name');
+    const player2name = sessionStorage.getItem('player2name');
+    let player1currentScore = parseNumString(sessionStorage.getItem('player1currentScore'));
+    let player2currentScore = parseNumString(sessionStorage.getItem('player2currentScore'));
 
+    document.getElementById('player-1-name').innerText = player1name;
+    document.getElementById('player-2-name').innerText = player2name;
+    document.getElementById('player-1-score').innerText = player1currentScore;
+    document.getElementById('player-2-score').innerText = player2currentScore;
+
+    if (player1currentScore > player2currentScore){
+        document.getElementById('winner-name').innerText = player1name;
+    }
+    else if (player1currentScore < player2currentScore){
+        document.getElementById('winner-name').innerText = player2name;
+    }
+    else{
+        document.getElementById('winner-name').innerText = '-';
+        const drawmsg = document.createElement('p');
+        drawmsg.innerText = `Well Played! It's a draw!`;
+        document.getElementsByClassName('winner-container').appendChild(drawmsg);
+    }
+
+    document.getElementById('choose-another-category').addEventListener('click', () => {
+        window.location.href = 'categories.html';
+    });
+
+    document.getElementById('end-game').addEventListener('click', () => {
+        window.location.href = 'result.html';
+    });
 }
 
 function handleResultPage(){
