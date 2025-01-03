@@ -47,7 +47,7 @@ body{
 }
 
 .question-info-container,
-.question-container,
+#question-container,
 .btn-div{
     display: flex;
     flex-direction: column;
@@ -77,22 +77,22 @@ h3{
     text-align: center;
 }
 
-.question-container{
+#question-container{
     background-color: #342828;
     margin: 10px 20px;
     border-radius: 16px;
 }
-#quest-text{
+#question-text{
     font-size: 25px;
     font-weight: 700;
     padding: 3px 8px;
 }
 
-.options-container {
+#options-container {
     display: flex;
     flex-direction: column;
 }
-.options-container button{
+#options-container button{
     background-color: #1B1212;
     padding: 3px 20px;
     text-align: center;
@@ -103,6 +103,7 @@ h3{
     font-weight: bold;
     color: #FFFFF0;
     height: 40px;
+    cursor: pointer;
 }
 
 .btn-div button{
@@ -117,4 +118,5 @@ h3{
     font-weight: bold;
     color: #FFFFF0;
     height: 40px;
+    cursor: pointer;
 }
