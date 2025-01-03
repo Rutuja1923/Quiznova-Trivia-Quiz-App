@@ -1,10 +1,15 @@
-window.onload = () => {
+window.onload = async () => {
     const page = document.body.getAttribute('data-page');
 
     if (page === "home"){
         sessionStorage.setItem('player1name','');
         sessionStorage.setItem('player2name','');
         sessionStorage.setItem('selectedCategoriesList', JSON.stringify([]));
+        sessionStorage.setItem('player1TotalScore',0);
+        sessionStorage.setItem('player2TotalScore',0);
+        sessionStorage.setItem('currPlayer',1);
+        sessionStorage.setItem('scoresList',JSON.stringify([10,15,20]));
+        sessionStorage.setItem('difficultiesList', JSON.stringify(['easy','medium','hard']));
         handleHomePage();
     } 
     else if (page === "categories"){
@@ -21,7 +26,10 @@ window.onload = () => {
         handleCategoriesPage();
     }
     else if (page === "quiz"){
-        handleQuizPage();
+        sessionStorage.setItem('player1currentScore',0);
+        sessionStorage.setItem('player2CurrentScore',0);
+        sessionStorage.setItem('qIndex',1);
+        await handleQuizPage();
     }
     else if (page === "score"){
         handleScorePage();
@@ -114,10 +122,137 @@ function handleCategoriesPage(){
     });
 }
 
-function handleQuizPage(){
+async function handleQuizPage(){
+    //player-name
     const player1name = sessionStorage.getItem('player1name');
     const player2name = sessionStorage.getItem('player2name');
+
+    //category-name
+    const currCatName = sessionStorage.getItem('currentSelectedCategory');
+
+    //setting the values
+    document.getElementById('player1-name').innerText = player1name;
+    document.getElementById('player2-name').innerText = player2name;
+    document.getElementById('category-name').innerText = getPrettyString(currCatName);
+    
+    //getting the question-index
+    let qIndex = parseNumString(sessionStorage.getItem('qIndex'));
+
+    //loading the first question
+    document.getElementById('question-container').innerHTML = 'Loading...';
+    await setQuizData(qIndex,currCatName);
+
+    //loading remaining questions
+    document.getElementById('next-question').addEventListener('click', async () => {
+        if (qIndex < 6) {
+            qIndex++;
+            document.getElementById('question-container').innerHTML = 'Loading...';
+            sessionStorage.setItem('qIndex', qIndex);
+            await setQuizData(qIndex, currCatName);
+        } else {
+            window.location.href = 'score.html';
+        }
+    });
 }
+
+function getPrettyString(word){
+    let prettyWord = word.split('_').map(
+        word =>word.charAt(0).toUpperCase() + word.slice(1)
+    ).join(' ');
+    return prettyWord;
+}
+
+function setPlayerName(){
+    let currPlayerName = parseNumString(sessionStorage.getItem('currPlayer')) === 1  ? 
+    sessionStorage.getItem('player1name'): 
+    sessionStorage.getItem('player2name');
+    return currPlayerName;
+}
+
+function parseNumString(numString){
+    return parseInt(numString,10);
+}
+
+function getIndex(questionIndex){
+    index = Math.floor((questionIndex - 1) / 2);
+    return index;
+}
+
+async function getQuestionData(category,difficulty){
+    try{
+        const response = await fetch(`https://the-trivia-api.com/v2/questions?limit=1&categories=${category}&difficulties=${difficulty}`);
+        if (!response.ok){
+            throw new Error('Failed to fetch question!');
+        }
+        const data = await response.json();
+        return data[0];
+    }
+    catch (e){
+        console.log(`Error: ${e}`);
+        return null;
+    }
+
+}
+
+function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+}
+
+async function setQuizData(qIndex,currCatName) {
+    //getting required question info
+    let difficultiesList = JSON.parse(sessionStorage.getItem('difficultiesList'));
+    let scoresList = JSON.parse(sessionStorage.getItem('scoresList'));
+    let currIndex = getIndex(qIndex);
+    let currDifficulty = difficultiesList[currIndex];
+    let currScore = scoresList[currIndex];
+
+    //setting the question info -current player-name, curent-difficulty, current-score
+    document.getElementById('player-name').innerText = `Question For: ${setPlayerName()}`;
+    document.getElementById('difficulty').innerText = `Difficulty Level: ${getPrettyString(currDifficulty)}`;
+    document.getElementById('score').innerText = `Points: ${currScore}`;
+    
+    //making api call
+    const responseData = await getQuestionData(currCatName,currDifficulty);
+
+    document.getElementById('question-container').innerHTML = '';
+
+    //setting the question text
+    const para = document.createElement('p');
+    para.setAttribute('id','question-text');
+    para.innerText = `Q${qIndex}. ${responseData.question.text}`;
+    document.getElementById('question-container').appendChild(para);
+
+    //getting the options and shuffling
+    const allOptions = [...responseData.incorrectAnswers, responseData.correctAnswer];
+    shuffle(allOptions);
+    correctAnswerIndex = allOptions.indexOf(responseData.correctAnswer);
+
+    //creating options div with option buttons
+    const optionsContainer = document.createElement('div');
+    optionsContainer.setAttribute('id','options-container');
+    optionsContainer.innerHTML = '';
+    allOptions.forEach((option,index) => {
+        const optBtn = document.createElement('button');
+        optBtn.innerText = option;
+        optBtn.addEventListener('click', () => handleAnswer(optBtn, index, correctAnswerIndex,currIndex));
+        optionsContainer.appendChild(optBtn);
+    });
+    document.getElementById('question-container').appendChild(optionsContainer);
+
+    //changing the current-player for taking turns
+    if ( parseNumString(sessionStorage.getItem('currPlayer')) === 1 ) {
+        sessionStorage.setItem('currPlayer',2) ;
+    }
+    else {
+        sessionStorage.setItem('currPlayer',1) ;
+    }
+}
+
+// function handleAnswer(){}
+
 
 function handleScorePage(){
 
