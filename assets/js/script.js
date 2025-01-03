@@ -258,17 +258,39 @@ async function setQuizData(qIndex,currCatName) {
     const optionsContainer = document.createElement('div');
     optionsContainer.setAttribute('id','options-container');
     optionsContainer.innerHTML = '';
+
+    //creating options
     allOptions.forEach((option,index) => {
         const optBtn = document.createElement('button');
+        optBtn.classList.add('option-button');
+
+        //setting the text for option
         optBtn.innerText = option;
+        
+        //adding click event listener
         optBtn.addEventListener('click', () => {
+            
+            //change the background color of that option;
+            optBtn.style.backgroundColor = '#353935';
+
+            //set the selected answer index as the index of current option
             sessionStorage.setItem('selectedAnswerIndex',index);
+            
+            //call the handle answer function to check if answer is right or wrong 
             handleAnswer(optBtn, index, correctAnswerIndex,currIndex);
+
+            //enable the next-question button if an option is selected
             if (parseNumString(sessionStorage.getItem('selectedAnswerIndex')) > -1){
                 console.log(sessionStorage.getItem('selectedAnswerIndex'));
                 document.getElementById('next-question').disabled = false;
                 document.getElementById('next-question').style.backgroundColor = '#C1E1C1';
                 document.getElementById('next-question').style.color = '#1B1212';
+
+                //if once an option is clicked disable all the options - player can click on option only once
+                const allButtons = document.querySelectorAll('.option-button');
+                allButtons.forEach((btn) => {
+                    btn.disabled = true;
+                })
             }
         });
         optionsContainer.appendChild(optBtn);
@@ -337,10 +359,10 @@ function handleScorePage(){
         document.getElementById('winner-name').innerText = player2name;
     }
     else{
-        document.getElementById('winner-name').innerText = '-';
+        document.getElementById('winner-name').innerText = 'None';
         const drawmsg = document.createElement('p');
         drawmsg.innerText = `Well Played! It's a draw!`;
-        document.getElementsByClassName('winner-container').appendChild(drawmsg);
+        document.getElementsByClassName('winner-container')[0].appendChild(drawmsg);
     }
 
     document.getElementById('choose-another-category').addEventListener('click', () => {
@@ -373,7 +395,7 @@ function handleResultPage(){
         document.getElementById('final-winner-name').innerText = '-';
         const drawmsg = document.createElement('p');
         drawmsg.innerText = `Well Played! It's a draw!`;
-        document.getElementsByClassName('final-winner-container').appendChild(drawmsg);
+        document.getElementsByClassName('final-winner-container')[0].appendChild(drawmsg);
     }
 
     document.getElementById('home-page-button').addEventListener('click', () => {
