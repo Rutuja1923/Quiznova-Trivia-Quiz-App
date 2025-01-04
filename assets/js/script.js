@@ -33,8 +33,6 @@ window.onload = async () => {
         handleCategoriesPage();
     }
     else if (page === "quiz"){
-        sessionStorage.setItem('player1currentScore',0);
-        sessionStorage.setItem('player2currentScore',0);
         sessionStorage.setItem('qIndex',1);
         sessionStorage.setItem('currPlayer',1);
         await handleQuizPage();
