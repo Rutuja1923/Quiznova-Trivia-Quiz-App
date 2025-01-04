@@ -21,7 +21,9 @@ window.onload = async () => {
         sessionStorage.setItem('currentSelectedCategory','');
         sessionStorage.setItem('player1currentScore',0);
         sessionStorage.setItem('player2currentScore',0);
-
+        sessionStorage.setItem('qIndex',1);
+        sessionStorage.setItem('currPlayer',1);
+        
         //using category-array to store selected list ifo and disable them for furthur rounds.
         let selectedCategoriesList = JSON.parse(sessionStorage.getItem('selectedCategoriesList')) || "[]";
         selectedCategoriesList.forEach((catName) => {
@@ -33,8 +35,6 @@ window.onload = async () => {
         handleCategoriesPage();
     }
     else if (page === "quiz"){
-        sessionStorage.setItem('qIndex',1);
-        sessionStorage.setItem('currPlayer',1);
         await handleQuizPage();
     }
     else if (page === "score"){
