@@ -19,6 +19,8 @@ window.onload = async () => {
     } 
     else if (page === "categories"){
         sessionStorage.setItem('currentSelectedCategory','');
+        sessionStorage.setItem('player1currentScore',0);
+        sessionStorage.setItem('player2currentScore',0);
 
         //using category-array to store selected list ifo and disable them for furthur rounds.
         let selectedCategoriesList = JSON.parse(sessionStorage.getItem('selectedCategoriesList')) || "[]";
