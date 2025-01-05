@@ -96,21 +96,22 @@ function handleHomePage() {
 }
 
 function handleCategory(categoryName){
-    console.log(`Chosen category ${categoryName}`);
+    //getting the selected category array and adding newly selected category
     let categoryArray = JSON.parse(sessionStorage.getItem('selectedCategoriesList'));
     if (!categoryArray.includes(categoryName)) {
         categoryArray.push(categoryName);
         sessionStorage.setItem('selectedCategoriesList', JSON.stringify(categoryArray));
     }
+    //setting the current selected category and disabling it for another click
     sessionStorage.setItem('currentSelectedCategory',categoryName);
     const currCatDiv = document.getElementById(categoryName);
-    currCatDiv.setAttribute('disabled',true);
+    currCatDiv.classList.add('disabled');
     currCatDiv.style.backgroundColor = '#848884';
 
-    //disabling all other categories after selecting one category for that round
+    //disabling all other categories after selecting one category for loop
     let categoryCards = document.querySelectorAll('.category-card');
     categoryCards.forEach((categoryCard) => {
-        categoryCard.style.cursor = 'not-allowed';
+        categoryCard.classList.add('disabled');
     });
 }
 
