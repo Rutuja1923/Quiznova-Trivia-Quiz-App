@@ -28,9 +28,8 @@ window.onload = async () => {
         let selectedCategoriesList = JSON.parse(sessionStorage.getItem('selectedCategoriesList')) || "[]";
         selectedCategoriesList.forEach((catName) => {
             const prevSelectedCat = document.getElementById(catName);
-            prevSelectedCat.setAttribute('disabled',true);
+            prevSelectedCat.classList.add('disabled');
             prevSelectedCat.style.backgroundColor = '#848884';
-            prevSelectedCat.style.cursor = 'not-allowed';
         });
         handleCategoriesPage();
     }
