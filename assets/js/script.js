@@ -198,7 +198,6 @@ async function getQuestionData(category,difficulty){
         console.log(`Error: ${e}`);
         return null;
     }
-
 }
 
 function shuffle(array) {
@@ -295,9 +294,7 @@ async function setQuizData(qIndex,currCatName) {
         });
         optionsContainer.appendChild(optBtn);
     });
-    document.getElementById('question-container').appendChild(optionsContainer);
-
-    
+    document.getElementById('question-container').appendChild(optionsContainer);  
 }
 
 function handleAnswer(optBtn, index, correctAnswerIndex,currIndex){
