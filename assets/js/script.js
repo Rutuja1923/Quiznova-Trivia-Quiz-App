@@ -155,9 +155,10 @@ async function handleQuizPage(){
             qIndex++;
             document.getElementById('question-container').innerHTML = 'Loading...';
             sessionStorage.setItem('qIndex', qIndex);
-            await setQuizData(qIndex, currCatName);
             changePlayer();
-        } else {
+            await setQuizData(qIndex, currCatName);  
+        } 
+        else {
             window.location.href = 'score.html';
         }
     });
@@ -168,13 +169,6 @@ function getPrettyString(word){
         word =>word.charAt(0).toUpperCase() + word.slice(1)
     ).join(' ');
     return prettyWord;
-}
-
-function setPlayerName(){
-    let currPlayerName = parseNumString(sessionStorage.getItem('currPlayer')) === 1  ? 
-    sessionStorage.getItem('player1name'): 
-    sessionStorage.getItem('player2name');
-    return currPlayerName;
 }
 
 function parseNumString(numString){
@@ -215,6 +209,13 @@ function changePlayer(){
     else {
         sessionStorage.setItem('currPlayer',1) ;
     }
+}
+
+function setPlayerName(){
+    let currPlayerName = parseNumString(sessionStorage.getItem('currPlayer')) === 1  ? 
+    sessionStorage.getItem('player1name'): 
+    sessionStorage.getItem('player2name');
+    return currPlayerName;
 }
 
 async function setQuizData(qIndex,currCatName) {
